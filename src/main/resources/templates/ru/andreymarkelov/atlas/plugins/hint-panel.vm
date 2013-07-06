@@ -1,0 +1,30 @@
+#if($hintbody)#evaluate($hintbody)#end
+<script language="javascript">
+jQuery(document).ready(function() {
+    #if($hintbody)
+        jQuery('div[id="hintPanel"]').show();
+        jQuery('div[id="hintPanel"]').find('h3.toggle-title').html("$hinttitle");
+        #if($hinttoggle)
+            jQuery('div[id="hintPanel"]').removeClass('toggle-wrap');
+        #else
+            jQuery('div[id="hintPanel"]').addClass('toggle-wrap');
+        #end
+    #else
+        jQuery('div[id="hintPanel"]').hide();
+    #end
+
+    JIRA.bind(JIRA.Events.NEW_CONTENT_ADDED, function(e, context, reason) {
+        #if($hintbody)
+            jQuery('div[id="hintPanel"]').show();
+            jQuery('div[id="hintPanel"]').find('h3.toggle-title').html("$hinttitle");
+            #if($hinttoggle)
+            jQuery('div[id="hintPanel"]').removeClass('toggle-wrap');
+            #else
+            jQuery('div[id="hintPanel"]').addClass('toggle-wrap');
+            #end
+        #else
+            jQuery('div[id="hintPanel"]').hide();
+        #end
+    });
+});
+</script>

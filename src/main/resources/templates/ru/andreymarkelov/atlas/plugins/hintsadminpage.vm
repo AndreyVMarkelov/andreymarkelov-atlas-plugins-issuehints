@@ -1,0 +1,49 @@
+<html>
+    <head>
+        <title>$i18n.getText("ru.andreymarkelov.atlas.plugins.hints.admin.title")</title>
+        <meta name="decorator" content="admin"/>
+        $webResourceManager.requireResource("jira.webresources:global-static")
+        $webResourceManager.requireResource("jira.webresources:jira-global")
+        $webResourceManager.requireResource("com.atlassian.auiplugin:ajs")
+        $webResourceManager.requireResource("ru.andreymarkelov.atlas.plugins.hints:hints-resources")
+    </head>
+    <body class="aui">
+        #if($action.hasAdminPermission())
+        <h2>$i18n.getText("ru.andreymarkelov.atlas.plugins.hints.admin.title")</h2>
+        <br/>
+        <div style="margin-left: 20px;"><a href="AdminHintsConfigEdit!default.jspa">$i18n.getText("ru.andreymarkelov.atlas.plugins.hints.admin.table.actions.new")</a></div>
+        <br/>
+        <table class="hintgrid" width="100%">
+            <thead>
+                <tr width="100%">
+                    <th class="hintgrid" width="10%">$i18n.getText("ru.andreymarkelov.atlas.plugins.hints.admin.table.project")</th>
+                    <th class="hintgrid" width="10%">$i18n.getText("ru.andreymarkelov.atlas.plugins.hints.admin.table.issuetype")</th>
+                    <th class="hintgrid" width="10%">$i18n.getText("ru.andreymarkelov.atlas.plugins.hints.admin.table.status")</th>
+                    <th class="hintgrid" width="15%">$i18n.getText("ru.andreymarkelov.atlas.plugins.hints.admin.table.hinttitle")</th>
+                    <th class="hintgrid" width="40%">$i18n.getText("ru.andreymarkelov.atlas.plugins.hints.admin.table.hintbody")</th>
+                    <th class="hintgrid" width="5%">$i18n.getText("ru.andreymarkelov.atlas.plugins.hints.admin.table.istoggle")</th>
+                    <th class="hintgrid" width="10%">$i18n.getText("ru.andreymarkelov.atlas.plugins.hints.admin.table.action")</th>
+                </tr>
+            </thead>
+            <tbody>
+            #foreach($hint in $action.getHints())
+                <tr width="100%">
+                    <td class="hintgrid" width="10%">$action.getProject($hint.getProjectId())</td>
+                    <td class="hintgrid" width="10%">$action.getIssueType($hint.getIssueTypeId())</td>
+                    <td class="hintgrid" width="10%">$action.getStatus($hint.getStatusId())</td>
+                    <td class="hintgrid" width="15%">$hint.getHintTitle()</td>
+                    <td class="hintgrid" width="40%">$hint.getHintBody()</td>
+                    <td class="hintgrid" width="5%">$hint.isToggle()</td>
+                    <td class="hintgrid"width="10%">
+                        <a href="AdminHintsConfigEdit!default.jspa?hindId=${hint.getId()}">$i18n.getText("ru.andreymarkelov.atlas.plugins.hints.admin.table.actions.edit")</a>&nbsp;
+                        <a href="AdminHintsConfig.jspa?remId=${hint.getId()}">$i18n.getText("ru.andreymarkelov.atlas.plugins.hints.admin.table.actions.remove")</a>
+                    </td>
+                </tr>
+            #end
+            </tbody>
+        </table>
+        #else
+            <div class="errorArea">$i18n.getText("ru.andreymarkelov.atlas.plugins.hints.admin.errors.noperms")</div>
+        #end
+    </body>
+</html>

@@ -1,0 +1,65 @@
+<atlassian-plugin key="${project.groupId}.${project.artifactId}" name="${project.name}" plugins-version="2">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="Andrey Markelov" url="http://ru.linkedin.com/in/andreymarkelov/"/>
+        <param name="plugin-icon">images/utils.png</param>
+        <param name="plugin-logo">images/AM.JPG</param>
+    </plugin-info>
+
+    <!-- add our i18n resource -->
+    <resource type="i18n" name="i18n" location="i18n.ru.andreymarkelov.atlas.plugins.hints"/>
+
+    <web-panel name="hint-panel" key="hintPanel" location="atl.jira.view.issue.left.context" weight="99">
+        <description>The Hint Panel</description>
+        <context-provider class="ru.andreymarkelov.atlas.plugins.HintPanel"/>
+        <resource name="view" type="velocity" location="/templates/ru/andreymarkelov/atlas/plugins/hint-panel.vm"/>
+        <label key="ru.andreymarkelov.atlas.plugins.hints.panel.label"/>
+    </web-panel>
+
+    <!-- add our web resources -->
+    <web-resource key="hints-resources" name="hints Web Resources">
+        <dependency>com.atlassian.auiplugin:ajs</dependency>
+        <resource type="download" name="hints.css" location="/css/hints.css"/>
+        <resource type="download" name="hints.js" location="/js/hints.js"/>
+        <resource type="download" name="images/" location="/images"/>
+        <context>hints</context>
+    </web-resource>
+
+    <!-- admin page -->
+    <web-item key="configure-admin-page" name="Configure Issue Hint Plug-In" section="system.admin/globalsettings" weight="95">
+        <label key="ru.andreymarkelov.atlas.plugins.hints.admin.title"/>
+        <condition class="com.atlassian.jira.plugin.webfragment.conditions.JiraGlobalPermissionCondition">
+            <param name="permission">admin</param>
+        </condition>
+        <link linkId="adminpagelink">/secure/AdminHintsConfig!default.jspa</link>
+    </web-item>
+
+    <webwork1 key="configure-admin-link" name="Configure Issue Hint Admin Link" class="java.lang.Object">
+        <actions>
+            <action name="ru.andreymarkelov.atlas.plugins.AdminHintsConfig" alias="AdminHintsConfig">
+                <view name="input">/templates/ru/andreymarkelov/atlas/plugins/hintsadminpage.vm</view>
+                <view name="success">/templates/ru/andreymarkelov/atlas/plugins/hintsadminpage.vm</view>
+            </action>
+        </actions>
+    </webwork1>
+    <webwork1 key="configure-admin-link-edit" name="Configure Issue Hint Create Admin Link" class="java.lang.Object">
+        <actions>
+            <action name="ru.andreymarkelov.atlas.plugins.AdminHintsConfigEdit" alias="AdminHintsConfigEdit">
+                <view name="input">/templates/ru/andreymarkelov/atlas/plugins/hintsadminpage-edit.vm</view>
+                <view name="editerror">/templates/ru/andreymarkelov/atlas/plugins/hintsadminpage-edit-error.vm</view>
+                <view name="success">/templates/ru/andreymarkelov/atlas/plugins/hintsadminpage-edit.vm</view>
+            </action>
+        </actions>
+    </webwork1>
+    <!-- end admin page -->
+
+    <!-- publish our component -->
+    <component key="hintDatastore" class="ru.andreymarkelov.atlas.plugins.HintDataStoreImpl" public="true">
+        <interface>ru.andreymarkelov.atlas.plugins.HintDataStore</interface>
+    </component>
+
+    <!-- import from the product container -->
+    <component-import key="applicationProperties" interface="com.atlassian.sal.api.ApplicationProperties" />
+    <component-import key="pluginSettingsFactory" interface="com.atlassian.sal.api.pluginsettings.PluginSettingsFactory"/>
+</atlassian-plugin>

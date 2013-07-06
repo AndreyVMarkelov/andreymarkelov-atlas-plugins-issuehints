@@ -1,0 +1,80 @@
+<html>
+    <head>
+    #if($action.getHindId())
+        #set($pagetitle = $i18n.getText("ru.andreymarkelov.atlas.plugins.hints.admin.edithint"))
+    #else
+        #set($pagetitle = $i18n.getText("ru.andreymarkelov.atlas.plugins.hints.admin.newhint"))
+    #end
+        <title>$pagetitle</title>
+        <meta name="decorator" content="admin"/>
+        $webResourceManager.requireResource("jira.webresources:global-static")
+        $webResourceManager.requireResource("jira.webresources:jira-global")
+        $webResourceManager.requireResource("com.atlassian.auiplugin:ajs")
+        $webResourceManager.requireResource("ru.andreymarkelov.atlas.plugins.hints:hints-resources")
+    </head>
+    <body class="aui">
+    #if($action.hasAdminPermission())
+        <h3>$pagetitle</h3>
+        #if($action.hasAnyErrors())
+        <div class="formErrors">
+            <table class="errorArea">
+                <tr><td>$i18n.getText("ru.andreymarkelov.atlas.plugins.hints.admin.errors"):</td></tr>
+                #foreach ($error in $action.getErrorMessages())<tr><td>${error}</td></tr>#end
+            </table>
+        </div>
+        #end
+        <form class="aui" onsubmit="if (this.submitted) return false; this.submitted = true; return true"
+                  name="jiraform" method="post" action="AdminHintsConfigEdit.jspa">
+            <input type="hidden" name="atl_token" value="$atl_token"/>
+            #if($action.getHindId())<input type="hidden" name="hindId" value="$action.getHindId()"/>#end
+            <div class="field-group">
+                <label for="projectId">$i18n.getText("ru.andreymarkelov.atlas.plugins.hints.admin.form.project")<span class="aui-icon icon-required"/></label>
+                <select id="projectId" name="projectId">
+                    #foreach($pair in $action.getAllProjects())
+                    <option #if($action.getProjectId() == $pair.key)selected="selected"#end value="$pair.key">$pair.value</option>
+                    #end
+                </select>
+            </div>
+            <div class="field-group">
+                <label for="issueTypeId">$i18n.getText("ru.andreymarkelov.atlas.plugins.hints.admin.form.issuetype")<span class="aui-icon icon-required"/></label>
+                <select id="issueTypeId" name="issueTypeId">
+                    #foreach($pair in $action.getAllIssueTypes())
+                    <option #if($action.getIssueTypeId() == $pair.key)selected="selected"#end value="$pair.key">$pair.value</option>
+                    #end
+                </select>
+            </div>
+            <div class="field-group">
+                <label for="statusId">$i18n.getText("ru.andreymarkelov.atlas.plugins.hints.admin.form.status")<span class="aui-icon icon-required"/></label>
+                <select id="statusId" name="statusId">
+                    #foreach($pair in $action.getAllStatuses())
+                    <option #if($action.getStatusId() == $pair.key)selected="selected"#end value="$pair.key">$pair.value</option>
+                    #end
+                </select>
+            </div>
+            <div class="field-group">
+                <label for="hintTitle">$i18n.getText("ru.andreymarkelov.atlas.plugins.hints.admin.form.hinttitle")<span class="aui-icon icon-required"/></label>
+                <input type="text" id="hintTitle" name="hintTitle" #if($action.getHintTitle())value="$action.getHintTitle()"#end/>
+            </div>
+            <div class="field-group">
+                <label for="hintBody">$i18n.getText("ru.andreymarkelov.atlas.plugins.hints.admin.form.hintbody")<span class="aui-icon icon-required"/></label>
+                <textarea id="hintBody" name="hintBody">#if($action.getHintBody())$action.getHintBody()#end</textarea>
+            </div>
+            <div class="field-group">
+                <label for="toggle">$i18n.getText("ru.andreymarkelov.atlas.plugins.hints.admin.form.istoggle")<span class="aui-icon icon-required"/></label>
+                <select id="toggle" name="toggle">
+                    <option #if($action.getToggle() == "true")selected="selected"#end value="true">True</option>
+                    <option #if($action.getToggle() == "false")selected="selected"#end value="false">False</option>
+                </select>
+            </div>
+            <div class="buttons-container">
+                <div class="buttons">
+                    <input class="button submit" type="submit" name="add" value="$action.getText("common.words.save")" accesskey="S" title="Press Alt+Shift+S to submit form"/>
+                    <input class="button submit" id="cancelButton" type="button" accesskey="`" title="Cancel (Alt+Shift + `)" name="Cancel" value="$action.getText("common.words.cancel")" onclick="window.history.back();"/>
+                </div>
+            </div>
+        </form>
+    #else
+        <div class="errorArea">$i18n.getText("ru.andreymarkelov.atlas.plugins.hints.admin.errors.noperms")</div>
+    #end
+    </body>
+</html>

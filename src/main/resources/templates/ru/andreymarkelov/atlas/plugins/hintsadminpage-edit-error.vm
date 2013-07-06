@@ -1,0 +1,26 @@
+<html>
+    <head>
+        #set($pagetitle = $i18n.getText("ru.andreymarkelov.atlas.plugins.hints.admin.error"))
+        <title>$pagetitle</title>
+        <meta name="decorator" content="admin"/>
+        $webResourceManager.requireResource("jira.webresources:global-static")
+        $webResourceManager.requireResource("jira.webresources:jira-global")
+        $webResourceManager.requireResource("com.atlassian.auiplugin:ajs")
+        $webResourceManager.requireResource("ru.andreymarkelov.atlas.plugins.hints:hints-resources")
+    </head>
+    <body class="aui">
+    #if($action.hasAdminPermission())
+        <h3>$pagetitle</h3>
+        #if($action.hasAnyErrors())
+        <div class="formErrors">
+            <table class="errorArea">
+                <tr><td>$i18n.getText("ru.andreymarkelov.atlas.plugins.hints.admin.errors"):</td></tr>
+                #foreach ($error in $action.getErrorMessages())<tr><td>${error}</td></tr>#end
+            </table>
+        </div>
+        #end
+    #else
+        <div class="errorArea">$i18n.getText("ru.andreymarkelov.atlas.plugins.hints.admin.errors.noperms")</div>
+    #end
+    </body>
+</html>
