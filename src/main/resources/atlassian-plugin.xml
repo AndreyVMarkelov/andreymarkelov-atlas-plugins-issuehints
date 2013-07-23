@@ -10,10 +10,9 @@
     <!-- add our i18n resource -->
     <resource type="i18n" name="i18n" location="i18n.ru.andreymarkelov.atlas.plugins.hints"/>
 
-    <web-panel name="hint-panel" key="hintPanel" location="atl.jira.view.issue.left.context" weight="99">
+    <web-panel name="hint-panel" key="hintPanel" location="atl.jira.view.issue.left.context" weight="99" class="ru.andreymarkelov.atlas.plugins.HintView">
         <description>The Hint Panel</description>
         <context-provider class="ru.andreymarkelov.atlas.plugins.HintPanel"/>
-        <resource name="view" type="velocity" location="/templates/ru/andreymarkelov/atlas/plugins/hint-panel.vm"/>
         <label key="ru.andreymarkelov.atlas.plugins.hints.panel.label"/>
     </web-panel>
 
@@ -62,4 +61,5 @@
     <!-- import from the product container -->
     <component-import key="applicationProperties" interface="com.atlassian.sal.api.ApplicationProperties" />
     <component-import key="pluginSettingsFactory" interface="com.atlassian.sal.api.pluginsettings.PluginSettingsFactory"/>
+    <component-import key="renderer" interface="com.atlassian.templaterenderer.velocity.one.six.VelocityTemplateRenderer" />
 </atlassian-plugin>
