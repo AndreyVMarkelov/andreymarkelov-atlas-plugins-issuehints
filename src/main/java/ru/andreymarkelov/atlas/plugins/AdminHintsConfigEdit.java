@@ -132,10 +132,6 @@ public class AdminHintsConfigEdit extends JiraWebActionSupport {
             addErrorMessage(getI18nHelper().getText("ru.andreymarkelov.atlas.plugins.hints.admin.form.status.error"));
         }
 
-        if (hintTitle == null || hintTitle.length() == 0) {
-            addErrorMessage(getI18nHelper().getText("ru.andreymarkelov.atlas.plugins.hints.admin.form.hinttitle.error"));
-        }
-
         if (hintBody == null || hintBody.length() == 0) {
             addErrorMessage(getI18nHelper().getText("ru.andreymarkelov.atlas.plugins.hints.admin.form.hintbody.error"));
         }

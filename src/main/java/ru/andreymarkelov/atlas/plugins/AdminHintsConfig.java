@@ -5,7 +5,7 @@ import java.util.List;
 import com.atlassian.crowd.embedded.api.User;
 import com.atlassian.jira.component.ComponentAccessor;
 import com.atlassian.jira.issue.RendererManager;
-import com.atlassian.jira.issue.fields.renderer.wiki.AtlassianWikiRenderer;
+import com.atlassian.jira.issue.fields.renderer.text.DefaultTextRenderer;
 import com.atlassian.jira.issue.issuetype.IssueType;
 import com.atlassian.jira.issue.status.Status;
 import com.atlassian.jira.project.Project;
@@ -118,7 +118,7 @@ public class AdminHintsConfig extends JiraWebActionSupport {
     }
 
     public String getWiki(String str) {
-        return rendererManager.getRenderedContent(AtlassianWikiRenderer.RENDERER_TYPE, str, null);
+        return rendererManager.getRenderedContent(DefaultTextRenderer.RENDERER_TYPE, str, null);
     }
 
     /**

@@ -8,6 +8,11 @@ jQuery(document).ready(function() {
         #else
             jQuery('div[id="hintPanel"]').addClass('toggle-wrap');
         #end
+        #if($hinttitle != "")
+            jQuery('#hintPanel_heading').show();
+        #else
+            jQuery('#hintPanel_heading').hide();
+        #end
     #else
         jQuery('div[id="hintPanel"]').hide();
     #end
@@ -21,9 +26,16 @@ jQuery(document).ready(function() {
             #else
             jQuery('div[id="hintPanel"]').addClass('toggle-wrap');
             #end
+            #if($hinttitle != "")
+                jQuery('#hintPanel_heading').show();
+            #else
+                jQuery('#hintPanel_heading').hide();
+            #end
         #else
             jQuery('div[id="hintPanel"]').hide();
         #end
     });
+
+    jQuery('div[id="hintPanel"]').remove();
 });
 </script>

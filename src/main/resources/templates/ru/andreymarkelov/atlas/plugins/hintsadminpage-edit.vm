@@ -52,7 +52,7 @@
                 </select>
             </div>
             <div class="field-group">
-                <label for="hintTitle">$i18n.getText("ru.andreymarkelov.atlas.plugins.hints.admin.form.hinttitle")<span class="aui-icon icon-required"/></label>
+                <label for="hintTitle">$i18n.getText("ru.andreymarkelov.atlas.plugins.hints.admin.form.hinttitle")</label>
                 <input type="text" id="hintTitle" name="hintTitle" #if($action.getHintTitle())value="$action.getHintTitle()"#end/>
             </div>
             <div class="field-group">

@@ -6,8 +6,6 @@ import java.util.Map;
 
 import com.atlassian.crowd.embedded.api.User;
 import com.atlassian.jira.issue.Issue;
-import com.atlassian.jira.issue.RendererManager;
-import com.atlassian.jira.issue.fields.renderer.wiki.AtlassianWikiRenderer;
 import com.atlassian.jira.plugin.webfragment.contextproviders.AbstractJiraContextProvider;
 import com.atlassian.jira.plugin.webfragment.model.JiraHelper;
 import com.atlassian.templaterenderer.TemplateRenderer;
@@ -21,11 +19,6 @@ public class HintPanel
     private final HintDataStore hintDatastore;
 
     /**
-     * Renderer manager.
-     */
-    private final RendererManager rendererManager;
-
-    /**
     * Template renderer.
     */
     private final TemplateRenderer renderer;
@@ -35,10 +28,8 @@ public class HintPanel
      */
     public HintPanel(
             HintDataStore hintDatastore,
-            RendererManager rendererManager,
             TemplateRenderer renderer) {
         this.hintDatastore = hintDatastore;
-        this.rendererManager = rendererManager;
         this.renderer = renderer;
     }
 
@@ -54,7 +45,7 @@ public class HintPanel
         HintData data = list.getHintForIssue(currentIssue);
         if (data != null) {
             contextMap.put("hinttitle", data.getHintTitle());
-            contextMap.put("hintbody", rendererManager.getRenderedContent(AtlassianWikiRenderer.RENDERER_TYPE, data.getHintBody(), null));
+            contextMap.put("hintbody", data.getHintBody());
             contextMap.put("hinttoggle", data.isToggle());
 
             StringWriter sw = new StringWriter();

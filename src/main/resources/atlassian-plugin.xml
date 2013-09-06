@@ -13,6 +13,7 @@
     <web-panel name="hint-panel" key="hintPanel" location="atl.jira.view.issue.left.context" weight="99" class="ru.andreymarkelov.atlas.plugins.HintView">
         <description>The Hint Panel</description>
         <context-provider class="ru.andreymarkelov.atlas.plugins.HintPanel"/>
+        <!-- <resource name="view" location="/templates/ru/andreymarkelov/atlas/plugins/hint-panel.vm" type="velocity"/> -->
         <label key="ru.andreymarkelov.atlas.plugins.hints.panel.label"/>
     </web-panel>
 
