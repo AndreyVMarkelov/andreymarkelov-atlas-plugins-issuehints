@@ -10,10 +10,10 @@
     <!-- add our i18n resource -->
     <resource type="i18n" name="i18n" location="i18n.ru.andreymarkelov.atlas.plugins.hints"/>
 
-    <web-panel name="hint-panel" key="hintPanel" location="atl.jira.view.issue.left.context" weight="99" class="ru.andreymarkelov.atlas.plugins.HintView">
+    <web-panel name="hint-panel" key="hintPanel" location="atl.jira.view.issue.left.context" weight="99">
         <description>The Hint Panel</description>
         <context-provider class="ru.andreymarkelov.atlas.plugins.HintPanel"/>
-        <!-- <resource name="view" location="/templates/ru/andreymarkelov/atlas/plugins/hint-panel.vm" type="velocity"/> -->
+        <resource name="view" location="/templates/ru/andreymarkelov/atlas/plugins/hint-panel.vm" type="velocity"/>
         <label key="ru.andreymarkelov.atlas.plugins.hints.panel.label"/>
     </web-panel>
 
@@ -27,7 +27,7 @@
     </web-resource>
 
     <!-- admin page -->
-    <web-item key="configure-admin-page" name="Configure Issue Hint Plug-In" section="system.admin/globalsettings" weight="95">
+    <web-item key="configure-admin-page" name="Configure Issue Hint Plug-In" section="admin_system_menu/top_system_section" weight="95">
         <label key="ru.andreymarkelov.atlas.plugins.hints.admin.title"/>
         <condition class="com.atlassian.jira.plugin.webfragment.conditions.JiraGlobalPermissionCondition">
             <param name="permission">admin</param>

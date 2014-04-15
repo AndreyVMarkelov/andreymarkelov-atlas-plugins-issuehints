@@ -32,7 +32,7 @@
                     <td class="hintgrid" width="10%">$action.getIssueType($hint.getIssueTypeId())</td>
                     <td class="hintgrid" width="10%">$action.getStatus($hint.getStatusId())</td>
                     <td class="hintgrid" width="15%">$hint.getHintTitle()</td>
-                    <td class="hintgrid" width="40%">$action.getWiki($hint.getHintBody())</td>
+                    <td class="hintgrid" width="40%">$hint.getHintBody()</td>
                     <td class="hintgrid" width="5%">$hint.isToggle()</td>
                     <td class="hintgrid"width="10%">
                         <a href="AdminHintsConfigEdit!default.jspa?hindId=${hint.getId()}">$i18n.getText("ru.andreymarkelov.atlas.plugins.hints.admin.table.actions.edit")</a>&nbsp;

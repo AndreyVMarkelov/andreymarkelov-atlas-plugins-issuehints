@@ -10,22 +10,10 @@ import com.atlassian.jira.plugin.webfragment.contextproviders.AbstractJiraContex
 import com.atlassian.jira.plugin.webfragment.model.JiraHelper;
 import com.atlassian.templaterenderer.TemplateRenderer;
 
-public class HintPanel
-    extends AbstractJiraContextProvider
-{
-    /**
-     * Datastore.
-     */
+public class HintPanel extends AbstractJiraContextProvider {
     private final HintDataStore hintDatastore;
-
-    /**
-    * Template renderer.
-    */
     private final TemplateRenderer renderer;
 
-    /**
-     * Constructor.
-     */
     public HintPanel(
             HintDataStore hintDatastore,
             TemplateRenderer renderer) {
@@ -34,10 +22,7 @@ public class HintPanel
     }
 
     @Override
-    public Map<String, Object> getContextMap(
-        User user,
-        JiraHelper helper)
-    {
+    public Map<String, Object> getContextMap(User user, JiraHelper helper) {
         Map<String, Object> contextMap = new HashMap<String, Object>();
 
         Issue currentIssue = (Issue) helper.getContextParams().get("issue");
